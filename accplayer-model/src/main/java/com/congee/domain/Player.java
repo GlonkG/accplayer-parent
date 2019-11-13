@@ -3,6 +3,7 @@ package com.congee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -41,6 +42,7 @@ public class Player implements Serializable {
     private Double cMoney;//消费金额
 
     @Column(name = "consume_createtime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date cCreatetime;//消费时间
 
 }

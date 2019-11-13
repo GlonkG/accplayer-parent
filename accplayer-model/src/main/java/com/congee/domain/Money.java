@@ -3,10 +3,9 @@ package com.congee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,6 +25,11 @@ public class Money implements Serializable {
     //定义程序序列化ID.相当于身份认证，主要用于程序的版本控制，保持不同版本的兼容性。
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "money_id")
+    private Integer yid;//用户钱包记录流水id
+
     @Column(name = "user_id")
     private Integer uid;//用户id
 
@@ -39,6 +43,7 @@ public class Money implements Serializable {
     private Double mBanlance;//钱包余额
 
     @Column(name = "money_changetime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date mChangetime;//充值时间
 
     @Column(name = "money_charge")

@@ -3,10 +3,9 @@ package com.congee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,11 +25,16 @@ public class Order implements Serializable {
     //定义程序序列化ID.相当于身份认证，主要用于程序的版本控制，保持不同版本的兼容性。
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_no")
+    private Integer ono;//订单流水id
+
     @Column(name = "order_id")
     private String oid;//订单id
 
     @Column(name = "accplayer_id")
-    private Integer aid;//陪玩id
+    private Integer apid;//陪玩id
 
     @Column(name = "user_name")
     private String userName;//用户姓名
@@ -51,6 +55,7 @@ public class Order implements Serializable {
     private Double oMoney;//订单金额
 
     @Column(name = "order_createtime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date oCreatetime;//订单创建时间
 
     @Column(name = "order_status")

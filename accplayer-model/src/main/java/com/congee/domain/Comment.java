@@ -3,6 +3,7 @@ package com.congee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -33,7 +34,7 @@ public class Comment implements Serializable {
     private Integer uid;//用户id
 
     @Column(name = "accplayer_id")
-    private Integer pid;//陪玩id
+    private Integer apid;//陪玩id
 
     @Column(name = "order_id")
     private String oid;//订单id
@@ -45,6 +46,7 @@ public class Comment implements Serializable {
     private String cContext;//评论内容
 
     @Column(name = "comment_createtime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date cCreatetime;//评论时间
 
     @Column(name = "comment_rank")

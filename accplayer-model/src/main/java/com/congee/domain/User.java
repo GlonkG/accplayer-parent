@@ -3,6 +3,7 @@ package com.congee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -45,6 +46,7 @@ public class User implements Serializable {
     private String userGender;//性别
 
     @Column(name = "user_birthday")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date userBirthday;//出生日期
 
     @Column(name = "user_qq")
@@ -63,9 +65,10 @@ public class User implements Serializable {
     private String userContent;//签名
 
     @Column(name = "user_createtime")
-    private Date userCreatetime;//创建时间
+    private String userCreatetime;//创建时间
 
     @Column(name = "user_becometime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date userBecometime;//成为陪玩时间
 
     @Column(name = "user_identify")

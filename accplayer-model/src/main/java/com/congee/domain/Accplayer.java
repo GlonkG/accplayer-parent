@@ -26,7 +26,7 @@ public class Accplayer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "accplayer_id")
-    private Integer pid;//陪玩id
+    private Integer apid;//陪玩id
 
     @Column(name = "user_id")
     private Integer uid;//用户id
@@ -55,5 +55,7 @@ public class Accplayer implements Serializable {
     @Column(name = "attention_num")
     private Integer aNum;//关注数量
 
+    @Column(name = "accplayer_audit")
+    private Integer aAudit;//陪玩入驻资质：默认0待审核 1已通过
 
 }
