@@ -81,7 +81,8 @@ public class UserController {
         if(teltoken!=null){
             log.info("The ID is already online");
             String userTel = userService.findByUserTel(teltoken).getUserTel();
-            return userTel;
+            User user = userService.findByUserTel(userTel);
+            return user.getUserNickname();
         }
         return "The ID is already offline";
     }
