@@ -28,4 +28,7 @@ public interface UserService {
 
     //批量删除用户
     public boolean deleteUsers(String[] uid);
+
+    //根据手机号查询对象
+    public User findByUserTel(String userTel);
 }

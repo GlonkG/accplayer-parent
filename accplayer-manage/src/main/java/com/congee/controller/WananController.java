@@ -1,6 +1,5 @@
 package com.congee.controller;
 
-import com.congee.UserApplication;
 import com.congee.domain.Wanan;
 import com.congee.service.WananService;
 import org.apache.shiro.SecurityUtils;
@@ -65,7 +64,7 @@ public class WananController {
         session.removeAttribute("usertoken");
     }
     //从redis查询用户名
-    @RequestMapping("/findusername")
+    @RequestMapping("/findwananname")
     public String findusername(HttpServletRequest request){
         String usertoken =(String)redisTemplate.opsForValue().get("usertoken");
         log.info("得到用户名为====================="+usertoken);

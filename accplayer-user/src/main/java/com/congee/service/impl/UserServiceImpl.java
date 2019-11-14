@@ -77,4 +77,9 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    @Override
+    public User findByUserTel(String userTel) {
+        return userRepository.findByUserTel(userTel);
+    }
 }

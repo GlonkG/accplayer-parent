@@ -4,17 +4,25 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.congee.UserApplication;
 import com.congee.domain.User;
+import com.congee.domain.Wanan;
 import com.congee.service.UserService;
 import com.congee.utils.Result;
 import com.congee.utils.UploadUtils;
 import com.sun.org.apache.bcel.internal.generic.NEW;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.persistence.Convert;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 
 /**
@@ -33,7 +41,50 @@ public class UserController {
     private UserService userService;
 
     //用户新增==注册
+    @Resource
+    private RedisTemplate<String,Object> redisTemplate;
+    //登录
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public String userLogin(@RequestBody User user){
+        log.info("前端传输的手机号为==================="+user.getUserTel());
+        User userTel = userService.findByUserTel(user.getUserTel());
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token=new UsernamePasswordToken(userTel.getUserTel(),userTel.getUserPwd());
+        try{
+            subject.login(token);
+            if(subject.isAuthenticated()){
+                redisTemplate.opsForValue().set("telToken",userTel.getUserTel());
+                Object teltoken = redisTemplate.opsForValue().get("telToken");
+                log.info("得到手机号为====================="+teltoken);
+                return "login success";
+            }else{
+                return "login failure";
+            }
+        }catch(Exception e){
+            log.error(e.getMessage());
+            e.printStackTrace();
+        }
+        return "login failure";
+    }
 
+    //注销
+    @RequestMapping("/loginout")
+    public void loginout(HttpServletRequest request ){
+        HttpSession session=request.getSession();
+        session.removeAttribute("telToken");
+    }
+    //从redis查询用户名
+    @RequestMapping("/finduserTel")
+    public String findusername(HttpServletRequest request){
+        String teltoken =(String)redisTemplate.opsForValue().get("telToken");
+        log.info("得到手机号为====================="+teltoken);
+        if(teltoken!=null){
+            log.info("The ID is already online");
+            String userTel = userService.findByUserTel(teltoken).getUserTel();
+            return userTel;
+        }
+        return "The ID is already offline";
+    }
     //根据用户id进行用户删除
     @RequestMapping("/delUser/{uid}")
     public String delUser(@PathVariable("uid")Integer uid){

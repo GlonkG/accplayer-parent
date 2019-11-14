@@ -1,6 +1,7 @@
 package com.congee.dao;
 
 import com.congee.domain.User;
+import com.congee.domain.Wanan;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -10,6 +11,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @time: 13:39
  */
 public interface UserRepository extends JpaRepository<User,Integer> {
-
+    //根据手机号查询对象
+    public User findByUserTel(String userTel);
 
 }
