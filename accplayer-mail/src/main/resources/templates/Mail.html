@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+<h2 style="color:red">您好,这是激活邮件,请点击下面的链接完成验证,</h2><br/>
+<a size="15px" style="color:green" href="#" th:href="@{http://127.0.0.1:9001/accplayer-user/active/{id}(id=${id}) }">激活账号</a>
+</body>
+</html>

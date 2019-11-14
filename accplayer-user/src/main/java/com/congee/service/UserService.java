@@ -3,6 +3,8 @@ package com.congee.service;
 import com.congee.domain.User;
 import com.congee.utils.Result;
 
+import java.util.List;
+
 /**
  * @author: 小米粥
  * @description: com.congee.service
@@ -31,4 +33,8 @@ public interface UserService {
 
     //根据手机号查询对象
     public User findByUserTel(String userTel);
+
+    //根据用户名查询用户--by wgb
+    public List<User> findByUserNickname(String username);
+
 }

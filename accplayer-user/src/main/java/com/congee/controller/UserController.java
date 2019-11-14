@@ -1,14 +1,10 @@
 package com.congee.controller;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.congee.UserApplication;
+import com.aliyuncs.exceptions.ClientException;
 import com.congee.domain.User;
-import com.congee.domain.Wanan;
 import com.congee.service.UserService;
 import com.congee.utils.Result;
+import com.congee.utils.TelUtils;
 import com.congee.utils.UploadUtils;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -18,12 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
 import javax.annotation.Resource;
-import javax.persistence.Convert;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author: 小米粥
@@ -40,9 +36,50 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //用户新增==注册
     @Resource
     private RedisTemplate<String,Object> redisTemplate;
+
+    //获得手机发送的验证码
+    @RequestMapping("/phone/{userTel}")
+    public String phoneCode(@PathVariable("userTel")String userTel) throws ClientException {
+        log.info("前端传输的手机号为==================="+userTel);
+        String code = TelUtils.telUtil(userTel);
+        log.info("发送的验证码为======================="+code);
+        if("fail".equals(code)){
+            log.info("发送验证码失败");
+            return code;
+        }
+        redisTemplate.opsForValue().set(userTel,code,15,TimeUnit.MINUTES);
+        return code;
+    }
+
+    //用户新增==注册
+    @RequestMapping(value = "/regist/{userTel}/{userPwd}/{code}")
+    public String userRegist(@PathVariable("userTel")String userTel,
+                             @PathVariable("userPwd")String userPwd,
+                             @PathVariable("code")String code){
+        log.info("前端传输的手机号为==================="+userTel+",验证码为=============="+code);
+        User user = userService.findByUserTel(userTel);
+        if(user!=null){
+            log.info("该手机号已被使用");
+            return "该手机号已被使用";
+        }else{
+            String code1 = redisTemplate.opsForValue().get(userTel).toString();
+            if(code.equals(code1)){
+                log.info("验证码正确");
+                User user1 = new User();
+                user1.setUserTel(userTel);
+                user1.setUserPwd(userPwd);
+                user1.setUserStatus(0);//默认未激活
+                user1.setUserIdentify(1);//默认身份
+                userService.addUser(user1);
+                return "regist success";
+            }
+        }
+        return "regist failure";
+    }
+
+
     //登录
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String userLogin(@RequestBody User user){
@@ -142,5 +179,12 @@ public class UserController {
             return "deleteUsers success";
         }
         return "deleteUsers failure";
+    }
+
+    //根据用户名查询用户--by wgb
+    @RequestMapping("/searchByUserName/{username}")
+    public List<User> searchByUserName(@PathVariable("username") String username){
+        List<User> nickname = userService.findByUserNickname(username);
+        return nickname;
     }
 }

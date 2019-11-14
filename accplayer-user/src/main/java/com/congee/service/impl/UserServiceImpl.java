@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.Convert;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -81,5 +82,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUserTel(String userTel) {
         return userRepository.findByUserTel(userTel);
+    }
+
+    @Override
+    public List<User> findByUserNickname(String username) {
+        List<User> byUserNickname = userRepository.findByUserNickname(username);
+        return byUserNickname;
     }
 }
