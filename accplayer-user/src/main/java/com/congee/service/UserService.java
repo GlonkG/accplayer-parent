@@ -2,6 +2,8 @@ package com.congee.service;
 
 import com.congee.domain.User;
 import com.congee.utils.Result;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -22,7 +24,7 @@ public interface UserService {
     //2.修改用户信息
     public void updUser(User user);
 
-    //后台管理分页查询展示用户
+    //后台管理分页查询展示全部用户
     public Result findUserByPage(Integer page,Integer size);
 
     //测试简单注册

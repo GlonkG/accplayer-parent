@@ -35,7 +35,7 @@ public class SendMail {
         MimeMessageHelper mimeMessageHelper = null;
         try {
             mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-            mimeMessageHelper.setSubject("用户"+user.getUserNickname()+"正在激活中");
+            mimeMessageHelper.setSubject("用户正在激活中");
             mimeMessageHelper.setFrom(MAIL_SENDER);
             mimeMessageHelper.setTo("3183084220@qq.com");//发给可卿
             StringBuilder str = new StringBuilder();

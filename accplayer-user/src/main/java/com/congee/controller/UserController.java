@@ -1,6 +1,9 @@
 package com.congee.controller;
 import com.aliyuncs.exceptions.ClientException;
+import com.congee.client.AccplayerClient;
+import com.congee.domain.Accplayer;
 import com.congee.domain.User;
+import com.congee.service.MailService;
 import com.congee.service.UserService;
 import com.congee.utils.Result;
 import com.congee.utils.TelUtils;
@@ -18,6 +21,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -72,14 +76,17 @@ public class UserController {
                 user1.setUserPwd(userPwd);
                 user1.setUserStatus(0);//默认未激活
                 user1.setUserIdentify(1);//默认身份
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                String format1 = format.format(new Date());
+                user1.setUserCreatetime(format1);//用户注册时间
                 userService.addUser(user1);
                 return "regist success";
             }
         }
         return "regist failure";
     }
-
-
+    @Autowired
+    private MailService mailService;
     //登录
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String userLogin(@RequestBody User user){
@@ -89,12 +96,13 @@ public class UserController {
         UsernamePasswordToken token=new UsernamePasswordToken(userTel.getUserTel(),userTel.getUserPwd());
         try{
             subject.login(token);
-            if(subject.isAuthenticated()){
+            if(subject.isAuthenticated()&&userTel.getUserStatus()==1){
                 redisTemplate.opsForValue().set("telToken",userTel.getUserTel());
                 Object teltoken = redisTemplate.opsForValue().get("telToken");
                 log.info("得到手机号为====================="+teltoken);
                 return "login success";
             }else{
+                mailService.send(userTel);//异步通知，无返回值
                 return "login failure";
             }
         }catch(Exception e){
@@ -110,7 +118,15 @@ public class UserController {
         HttpSession session=request.getSession();
         session.removeAttribute("telToken");
     }
-    //从redis查询用户名
+    //个人资料获取登录手机号:再通过手机号查询个人信息
+    @RequestMapping("/getInfoByTel")
+    public User getInfoByTel(){
+        String userTel =(String)redisTemplate.opsForValue().get("telToken");
+        User user = userService.findByUserTel(userTel);
+        return user;
+    }
+
+    //判断用户状态是否在线：从redis查询用户名
     @RequestMapping("/finduserTel")
     public String findusername(HttpServletRequest request){
         String teltoken =(String)redisTemplate.opsForValue().get("telToken");
@@ -187,4 +203,17 @@ public class UserController {
         List<User> nickname = userService.findByUserNickname(username);
         return nickname;
     }
+
+    @Autowired
+    private AccplayerClient accplayerClient;
+    //后台专员审核陪玩入驻资质
+    @RequestMapping("/check/{apid}")
+    public String checkAccplayer(@PathVariable("apid")Integer apid){
+        Accplayer accplayer = accplayerClient.checkAccplayer(apid);
+        User user = userService.findByUid(accplayer.getUid());
+        user.setUserBecometime(new Date());//陪玩审核通过，成功入驻的时间
+        userService.updUser(user);//修改入驻的时间
+        return "openFeign success";
+    }
+
 }

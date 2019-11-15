@@ -72,7 +72,7 @@ public class User implements Serializable {
     private Date userBecometime;//成为陪玩时间
 
     @Column(name = "user_identify")
-    private Integer userIdentify;//标识：0 老板(普通用户) 1 陪玩 2 管理员
+    private Integer userIdentify;//标识：0 老板(普通用户) 1 陪玩
 
     @Column(name = "user_status")
     private Integer userStatus;//用户申请状态： 0 未认证 1 正常

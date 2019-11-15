@@ -56,6 +56,15 @@ public class Accplayer implements Serializable {
     private Integer aNum;//关注数量
 
     @Column(name = "accplayer_audit")
-    private Integer aAudit;//陪玩入驻资质：默认0待审核 1已通过
+    private Integer aAudit;//陪玩入驻资质：默认-1待审核 1已通过
+
+    @Column(name = "acc_pic")
+    private String accPic;//认证资料图
+
+    @Column(name = "acc_voice")
+    private String accVoice;//语音介绍
+
+    @Column(name = "user_nickname")
+    private String userNickname;//昵称
 
 }

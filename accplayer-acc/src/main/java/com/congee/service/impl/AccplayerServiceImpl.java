@@ -66,5 +66,37 @@ public class AccplayerServiceImpl implements AccplayerService {
         return result;
     }
 
+    @Override
+    public void delAccplayer(Integer apid) {
+        accplayerRepository.deleteById(apid);
+    }
+
+    @Override
+    public List<Accplayer> findByGName(String gName) {
+        List<Accplayer> byGName = accplayerRepository.findByGName(gName);
+        return byGName;
+    }
+    /**
+     * 批量删除陪玩
+     * @param apid
+     */
+    @Override
+    public boolean deleteAccplayers(String[] apid) {
+        int count = 0;
+        for (String apid1 : apid) {
+            Integer id = Integer.valueOf(apid1);
+            accplayerRepository.deleteById(id);
+            count ++;
+        }
+        if(count==apid.length){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void addAccplayer(Accplayer accplayer) {
+       accplayerRepository.save(accplayer);
+    }
 
 }

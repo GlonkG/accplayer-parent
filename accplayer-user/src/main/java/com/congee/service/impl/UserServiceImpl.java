@@ -89,4 +89,5 @@ public class UserServiceImpl implements UserService {
         List<User> byUserNickname = userRepository.findByUserNickname(username);
         return byUserNickname;
     }
+
 }

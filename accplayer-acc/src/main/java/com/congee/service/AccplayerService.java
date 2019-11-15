@@ -18,7 +18,18 @@ public interface AccplayerService {
     public Result findByZero(Integer aAudit,Integer page,Integer size);
     //后台根据apid更改陪玩资质
     public Accplayer findByApid(Integer apid);
-
     //后台echarts分页查询
     public Result findEcharts(Integer page,Integer size);
+
+    //后台删除陪玩信息
+    public void delAccplayer(Integer apid);
+
+    //根据板块名称查询陪玩--by yhf
+    public List<Accplayer> findByGName(String gName);
+
+    //批量删除陪玩
+    public boolean deleteAccplayers(String[] apid);
+
+    //陪玩申请入驻服务
+    public void addAccplayer(Accplayer accplayer);
 }

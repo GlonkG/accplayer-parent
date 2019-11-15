@@ -1,6 +1,7 @@
 package com.congee.dao;
 
 import com.congee.domain.Accplayer;
+import com.congee.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,4 +17,6 @@ import java.util.List;
 public interface AccplayerRepository extends JpaRepository<Accplayer,Integer> {
     //根据陪玩资质分页查询
     public Page<Accplayer> findByAAudit(Integer aAudit,Pageable pageable);
+    //根据板块名称查询陪玩--by yhf
+    public List<Accplayer> findByGName(String gName);
 }

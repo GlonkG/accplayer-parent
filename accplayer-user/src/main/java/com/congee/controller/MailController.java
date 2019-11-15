@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MailController {
     private final static Logger log = LoggerFactory.getLogger(MailController.class);
-    @Autowired
+    /*@Autowired
     private MailService mailService;
     @RequestMapping("mail")
     public String mail(@RequestBody User user){
         mailService.send(user);//异步通知，无返回值
         return "success";
-    }
+    }*/
 
     @Autowired
     private UserService userService;
