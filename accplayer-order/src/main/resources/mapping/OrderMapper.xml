@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.congee.mapper.OrderMapper">
+    <resultMap id="order" type="com.congee.domain.Order">
+        <id column="order_id" property="oid"></id>
+        <result column="order_no" property="orderNo"></result>
+        <result column="accplayer_id" property="apid"></result>
+        <result column="user_nickname" property="userNickname"></result>
+        <result column="user_tel" property="userTel"></result>
+        <result column="user_qq" property="userQq"></result>
+        <result column="game_id" property="gid"></result>
+        <result column="game_name" property="gName"></result>
+        <result column="order_appointedtime" property="oAppointedtime"></result>
+        <result column="order_content" property="oContent"></result>
+        <result column="order_money" property="oMoney"></result>
+        <result column="order_createtime" property="oCreatetime"></result>
+        <result column="order_status" property="oStatus"></result>
+
+    </resultMap>
+<insert id="saveOrder" parameterType="com.congee.domain.Order">
+    insert into acc_order(order_id,order_no,accplayer_id,user_nickname,user_tel,user_qq,game_id,game_name,order_appointedtime,order_content,order_money,order_createtime,order_status)
+    value(#{oid},#{orderNo},#{apid},#{userNickname},#{userTel},#{userQq},#{gid},#{gName},#{oAppointedtime},#{oContent},#{oMoney},#{oCreatetime},#{oStatus})
+</insert>
+    <sql id="column_base">
+        order_id,order_no,accplayer_id,user_nickname,game_id,game_name,
+    order_appointedtime,order_content,order_money,order_createtime,order_status
+    </sql>
+    <select id="findById" resultMap="order" parameterType="com.congee.domain.Order">
+        select
+        <include refid="column_base"></include>
+        from
+        acc_order
+        where
+        order_id=#{oid}
+    </select>
+
+</mapper>

@@ -3,9 +3,11 @@ package com.congee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author: 小米粥
@@ -59,7 +61,7 @@ public class Accplayer implements Serializable {
     private Integer aAudit;//陪玩入驻资质：默认-1待审核 1已通过
 
     @Column(name = "acc_pic")
-    private String accPic;//认证资料图
+    private String accPic;//头像
 
     @Column(name = "acc_voice")
     private String accVoice;//语音介绍
@@ -67,4 +69,13 @@ public class Accplayer implements Serializable {
     @Column(name = "user_nickname")
     private String userNickname;//昵称
 
+    @Column(name = "user_gender")
+    private String userGender;//性别 add by 11/16 16:21
+
+    @Column(name = "user_becometime")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date userBecometime;//成为陪玩时间
+
+    @Column(name = "datum_pic")
+    private String datumPic;//认证资料照
 }

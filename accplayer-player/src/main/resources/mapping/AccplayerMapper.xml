@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.congee.mapper.PlayerMapper">
+<!--根据aapid查询陪玩的资料-->
+<select id="findById" parameterType="java.lang.Integer" resultType="com.congee.domain.AccpalyerDetail3">
+    SELECT
+u.user_nickname userNickName,
+u.user_address uAddress,
+a.accplayer_id apid,
+i.accplayer_pic pic
+FROM
+acc_user u,
+acc_accplayer a,
+acc_images i
+WHERE
+a.accplayer_id=i.accplayer_id and
+a.user_id=u.user_id and
+a.accplayer_id=#{apid}
+</select>
+
+  <!--根据aapid查询陪玩的pic详情-->
+<select id="findByaapidToImages" resultType="com.congee.domain.ImagesDetail" parameterType="java.lang.Integer">
+    SELECT
+i.accplayer_pic1 aPic1,
+i.accplayer_pic2 aPic2 ,
+i.accplayer_pic3 aPic3,
+i.accplayer_pic4 aPic4
+FROM
+acc_images i
+WHERE
+accplayer_id=#{apid}
+  </select>
+  <!--
+      根据陪玩id,查询信息
+  -->
+<select id="findByaapid" resultType="com.congee.domain.GameDetail" parameterType="java.lang.Integer">
+  SELECT
+    a.accplayer_id apid,
+    g.game_id gid,
+    a.accplayer_description pInfo,
+    attention_num pAttentionNum,
+    g.game_duanwei gDuanWei,
+    g.game_name gName
+  FROM
+    acc_accplayer_game ac,
+    acc_game g,
+    acc_accplayer a
+  WHERE
+    ac.game_id=g.game_id and
+    ac.accplayer_id=a.accplayer_id and
+    ac.accplayer_id=#{apid}
+</select>
+  <!--根据游戏名称查询 陪玩 (游戏名)的接单数量-->
+  <select id="orderTotal" parameterType="java.lang.String" resultType="com.congee.domain.OrderGame">
+  SELECT
+    count(o.game_name) orderGameNumber
+  FROM
+    acc_order o,
+    acc_accplayer a
+  WHERE
+    o.accplayer_id=a.accplayer_id and
+    o.game_name=#{gameName}
+  </select>
+
+<!-- 根据pic查询详情信息-->
+<select id="findByPic" resultType="com.congee.domain.AccplayerDetail" parameterType="java.lang.String">
+  SELECT
+    i.accplayer_pic aPic,
+    i.accplayer_pic1 aPic1,
+    i.accplayer_pic2 aPic2,
+    i.accplayer_pic3 aPic3,
+    i.accplayer_pic4 aPic4,
+    i.accplayer_video aVideo,
+    a.accplayer_id apid,
+    g.game_name gName,
+    g.game_logo gLogo,
+    a.game_price gPrice,
+    g.game_duanwei gDuanWei,
+    u.user_nickname userNickname,
+    u.user_gender userGender,
+    u.user_address userAddress
+  FROM
+    acc_images i,
+    acc_accplayer a,
+    acc_user u,
+    acc_game g,
+    acc_accplayer_game ag
+  WHERE
+    i.accplayer_id=a.accplayer_id and
+    a.user_id=u.user_id and
+    a.accplayer_id=ag.accplayer_id and
+    ag.game_id=g.game_id and
+    i.accplayer_pic=#{aPic}
+  </select>
+  <!--根据游戏名称 (异步)查询信息-->
+  <select id="findByGameName" resultType="com.congee.domain.AccplayerDetail2" parameterType="java.lang.String">
+  select
+    count(o.game_name) orderNumber,
+    g.game_name gName,
+    g.game_logo gameLogo,
+    g.game_duanwei gameDuanWei,
+    a.game_price gamePrice,
+    a.accplayer_description accplayerDescription,
+    o.order_appointedtime orderAppointedTime,
+    i.accplayer_video accplayerVideo
+  FROM
+    acc_game g,
+    acc_accplayer a,
+    acc_order o,
+    acc_images i
+  WHERE
+    g.game_id=a.game_id and
+    o.accplayer_id=a.accplayer_id and
+    i.accplayer_id=a.accplayer_id and
+    g.game_name=#{gameName}
+  </select>
+
+  <resultMap id="game" type="com.congee.domain.Game">
+    <id column="game_id" property="gid"></id>
+    <result column="game_name" property="gName"></result>
+    <result column="game_logo" property="gLogo"></result>
+    <result column="game_daqu" property="gDuqu"></result>
+    <result column="game_duanwei" property="gDuanwei"></result>
+  </resultMap>
+  <!--根据游戏名称 (异步)查询信息-->
+<select id="findByGameName1" parameterType="java.lang.String" resultMap="game">
+  SELECT
+    g.game_id,
+    g.game_daqu,
+    g.game_logo,
+    g.game_name
+    g.game_duanwei
+  FROM
+    acc_game g
+  WHERE
+    g.game_name=#{gameName}
+</select>
+  <resultMap id="order" type="com.congee.domain.Order">
+    <id column="order_id" property="oid"></id>
+    <result column="order_no" property="orderNo"></result>
+    <result column="accplayer_id" property="aid"></result>
+    <result column="user_name" property="userName"></result>
+    <result column="user_tel" property="userTel"></result>
+    <result column="user_qq" property="userQQ"></result>
+    <result column="game_id" property="gid"></result>
+    <result column="game_name" property="gName"></result>
+    <result column="order_appointedtime" property="oAppointedtime"></result>
+    <result column="order_content" property="oContent"></result>
+    <result column="order_money" property="oMoney"></result>
+    <result column="order_createtime" property="oCreatetime"></result>
+    <result column="order_status" property="oStatus"></result>
+  </resultMap>
+
+  <!--根据游戏名称 (异步)对应游戏的历史接单数量-->
+<select id="findByGameName2" parameterType="java.lang.String" resultMap="order">
+  SELECT
+    COUNT(o.game_name)
+  FROM
+    acc_order o
+  WHERE
+    o.game_name=#{gameName}
+</select>
+
+<resultMap id="attentionBase" type="com.congee.domain.Attention">
+  <id column="attention_id" property="aid"></id>
+  <result column="user_id" property="uid"></result>
+  <result column="accplayer_id" property="apid"></result>
+  <result column="attention_status" property="aStatus"></result>
+</resultMap>
+  <!-- 陪玩被关注的总数量-->
+  <select id="findNum" resultType="int" parameterType="java.util.Map">
+    SELECT
+    COUNT(a.accplayer_id)
+    FROM
+    acc_attention a
+    where
+      a.accplayer_id=#{apid}  and
+      a.attention_status=#{aStatus}
+  </select>
+
+  <sql id="attention">
+   attention_id,user_id,accplayer_id,attention_status
+  </sql>
+
+  <!--查询用户是否关注陪玩-->
+  <select id="findUp" parameterType="java.util.Map" resultMap="attentionBase">
+    select <include refid="attention"></include>
+    from acc_attention
+    where
+    user_id=#{uid} and
+    accplayer_id=#{apid}
+  </select>
+    <!--新增关注-->
+  <insert id="saveAttention" parameterType="com.congee.domain.Attention">
+    insert into acc_attention (attention_id,user_id,accplayer_id,attention_status)
+    value (#{aid},#{uid},#{apid},#{aStatus})
+  </insert>
+  <!--取消关注(修改aStatus)-->
+ <update id="update" parameterType="com.congee.domain.Attention" >
+   update acc_attention set
+        attention_status=#{aStatus}
+   where
+     user_id=#{uid} and
+     accplayer_id=#{apid}
+ </update>
+</mapper>

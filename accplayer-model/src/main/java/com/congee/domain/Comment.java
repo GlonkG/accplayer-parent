@@ -30,8 +30,8 @@ public class Comment implements Serializable {
     @Column(name = "comment_id")
     private Integer cid;//评论id
 
-    @Column(name = "user_id")
-    private Integer uid;//用户id
+    @Column(name = "user_nickname")
+    private String userNickname;//昵称
 
     @Column(name = "accplayer_id")
     private Integer apid;//陪玩id
@@ -46,7 +46,7 @@ public class Comment implements Serializable {
     private String cContext;//评论内容
 
     @Column(name = "comment_createtime")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date cCreatetime;//评论时间
 
     @Column(name = "comment_rank")

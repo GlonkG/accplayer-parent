@@ -18,7 +18,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "acc_attention")
-public class Attention implements Serializable {
+public class Attention{
 
     //定义程序序列化ID.相当于身份认证，主要用于程序的版本控制，保持不同版本的兼容性。
     private static final long serialVersionUID = 1L;
@@ -32,7 +32,7 @@ public class Attention implements Serializable {
     private Integer uid;//用户id
 
     @Column(name = "accplayer_id")
-    private Integer pid;//陪玩id
+    private Integer apid;//陪玩id
 
     @Column(name = "attention_status")
     private Integer aStatus;//关注状态：默认 0关注 1拉黑

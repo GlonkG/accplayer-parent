@@ -27,17 +27,17 @@ public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_no")
-    private Integer ono;//订单流水id
-
     @Column(name = "order_id")
-    private String oid;//订单id
+    private Integer oid;//订单id
+
+    @Column(name = "order_no")
+    private String orderNo;//订单流水id==订单编号
 
     @Column(name = "accplayer_id")
     private Integer apid;//陪玩id
 
-    @Column(name = "user_name")
-    private String userName;//用户姓名
+    @Column(name = "user_nickname")
+    private String userNickname;//昵称
 
     @Column(name = "game_id")
     private Integer gid;//板块id=服务id
@@ -46,7 +46,7 @@ public class Order implements Serializable {
     private String gName;//板块名称=服务类型
 
     @Column(name = "order_appointedtime")
-    private String oAppointedtime;//约定时长
+    private Integer oAppointedtime;//约定时长
 
     @Column(name = "order_content")
     private String oContent;//订单留言
@@ -55,9 +55,15 @@ public class Order implements Serializable {
     private Double oMoney;//订单金额
 
     @Column(name = "order_createtime")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date oCreatetime;//订单创建时间
 
     @Column(name = "order_status")
     private Integer oStatus;//订单状态
+
+    @Column(name = "user_tel")
+    private String userTel;//电话号码
+
+    @Column(name = "user_qq")
+    private String userQq;//QQ
 }

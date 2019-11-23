@@ -29,7 +29,7 @@ public class Images implements Serializable {
     private Integer eid;//图片详情id
 
     @Column(name = "accplayer_id")
-    private Integer pid;//陪玩id
+    private Integer apid;//陪玩id
 
     @Column(name = "accplayer_pic1")
     private String aPic1;//陪玩小图1

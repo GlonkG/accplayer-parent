@@ -27,9 +27,9 @@ public class SendMail {
     @RabbitListener(queues = "mailqueue")
     public void mail(User user) {
         //创建邮件正文
-        Context context = new Context();
+        /*Context context = new Context();
         context.setVariable("id",user.getUid() );
-        String emailContent = templateEngine.process("Mail", context);
+        String emailContent = templateEngine.process("Mail", context);*/
 
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = null;
@@ -37,11 +37,12 @@ public class SendMail {
             mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
             mimeMessageHelper.setSubject("用户正在激活中");
             mimeMessageHelper.setFrom(MAIL_SENDER);
-            mimeMessageHelper.setTo("3183084220@qq.com");//发给可卿
-            StringBuilder str = new StringBuilder();
+            mimeMessageHelper.setTo(user.getUserQq()+"@qq.com");//发给s
+            /*StringBuilder str = new StringBuilder();
             str.append(emailContent);
             mimeMessageHelper.setText(str.toString(), true);
-            mimeMessageHelper.setText(emailContent,true);
+            mimeMessageHelper.setText(emailContent,true);*/
+            mimeMessage.setText("审核通过，请尽快上传认证资料哦亲");
             javaMailSender.send(mimeMessage);
         } catch (Exception e) {
             logger.error("邮件发送失败", e.getMessage());

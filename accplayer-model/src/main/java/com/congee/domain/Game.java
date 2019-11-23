@@ -17,7 +17,7 @@ import java.io.Serializable;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "game")
+@Table(name = "acc_game")
 public class Game implements Serializable {
 
     //定义程序序列化ID.相当于身份认证，主要用于程序的版本控制，保持不同版本的兼容性。

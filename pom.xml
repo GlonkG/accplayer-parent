@@ -17,6 +17,7 @@
         <module>accplayer-order</module>
         <module>accplayer-pay</module>
         <module>accplayer-manage</module>
+        <module>accplayer-upload</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

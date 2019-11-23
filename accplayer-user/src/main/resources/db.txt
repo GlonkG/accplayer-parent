@@ -1,250 +1,292 @@
 /*
- Navicat Premium Data Transfer
+Navicat MySQL Data Transfer
 
- Source Server         : congee
- Source Server Type    : MySQL
- Source Server Version : 50096
- Source Host           : localhost:3306
- Source Schema         : laikaihei
+Source Server         : MysqlConn
+Source Server Version : 50096
+Source Host           : localhost:3306
+Source Database       : laikaihei
 
- Target Server Type    : MySQL
- Target Server Version : 50096
- File Encoding         : 65001
+Target Server Type    : MYSQL
+Target Server Version : 50096
+File Encoding         : 65001
 
- Date: 15/11/2019 21:58:10
+Date: 2019-11-23 10:43:08
 */
 
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
+SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
 -- Table structure for acc_accplayer
 -- ----------------------------
 DROP TABLE IF EXISTS `acc_accplayer`;
-CREATE TABLE `acc_accplayer`  (
-  `accplayer_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '陪玩id',
+CREATE TABLE `acc_accplayer` (
+  `accplayer_id` int(11) NOT NULL auto_increment COMMENT '陪玩id',
   `user_id` int(11) NOT NULL COMMENT '用户id',
-  `game_id` int(11) NULL DEFAULT NULL COMMENT '板块id',
-  `game_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '板块名',
-  `game_daqu` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '游戏大区',
-  `game_duanwei` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '游戏段位\r\n',
-  `game_playerid` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '游戏id',
-  `game_price` double(11, 0) NULL DEFAULT NULL COMMENT 'xx元/小时',
-  `accplayer_description` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '服务介绍',
+  `game_id` int(11) default NULL COMMENT '板块id',
+  `game_name` varchar(255) collate utf8_bin default NULL COMMENT '板块名',
+  `game_daqu` varchar(255) collate utf8_bin default NULL COMMENT '游戏大区',
+  `game_duanwei` varchar(255) collate utf8_bin default NULL COMMENT '游戏段位\r\n',
+  `game_playerid` varchar(255) collate utf8_bin default NULL COMMENT '游戏id',
+  `game_price` double(11,0) default NULL COMMENT 'xx元/小时',
+  `accplayer_description` varchar(255) collate utf8_bin default NULL COMMENT '服务介绍',
   `accplayer_audit` int(11) NOT NULL COMMENT '陪玩入驻资质：默认 -1待审核 1已通过 ',
-  `acc_pic` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '认证资料照',
-  `acc_voice` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '语音介绍',
-  `attention_num` int(20) NULL DEFAULT NULL COMMENT '关注数量',
-  `user_nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '用户昵称',
-  PRIMARY KEY USING BTREE (`accplayer_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+  `acc_pic` varchar(255) collate utf8_bin default NULL COMMENT '头像',
+  `acc_voice` varchar(255) collate utf8_bin default NULL COMMENT '语音介绍',
+  `attention_num` int(20) default NULL COMMENT '关注数量',
+  `user_nickname` varchar(255) collate utf8_bin default NULL COMMENT '用户昵称',
+  `user_gender` varchar(255) collate utf8_bin default NULL COMMENT '用户性别',
+  `user_becometime` date default NULL COMMENT '成为陪玩时间',
+  `datum_pic` varchar(255) collate utf8_bin default NULL COMMENT '认证资料照',
+  PRIMARY KEY  USING BTREE (`accplayer_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of acc_accplayer
 -- ----------------------------
-INSERT INTO `acc_accplayer` VALUES (3, 1, 2, 'lol', '艾欧尼亚', '荣耀黄金', '刀刀丶直接下单', 20, '我叫刀刀，喜欢玩游戏。但是技术很垃圾。不过你喜欢快乐的话找我就没错了。', -1, 'http://q04va6ogc.bkt.clouddn.com/Fr0WoZijj4gUhT9rOMRBRfCyrs7R', NULL, 280, '小米粥');
-INSERT INTO `acc_accplayer` VALUES (4, 1, 3, 'qq飞车', '电信', '青铜', '嗷嗷嗷', 2, '啊啊啊啊', 1, 'http://q04va6ogc.bkt.clouddn.com/FiKX-ZvydEpMrR1MG4aNoxraSRWV', NULL, 350, '小米粥');
-INSERT INTO `acc_accplayer` VALUES (7, 1, 6, '云顶之弈', 'xxx', '入门', '晚晚不爱吃鱼', 15, '选我没错୧(๑•̀⌄•́๑)૭', -1, 'http://q04va6ogc.bkt.clouddn.com/Ft8gu9YWockBx8tN4pGWzPRSHWI6', NULL, 123, '小米粥');
-INSERT INTO `acc_accplayer` VALUES (8, 1, 2, 'lol', '艾欧尼亚', '黄金', '测试', 10, '声音好听', -1, 'http://q04va6ogc.bkt.clouddn.com/FmGCfYY6_np5rv4rC69gowWg-vSU', 'https://music.163.com/song?id=525935284&userid=311334083', 50, '小米粥');
-INSERT INTO `acc_accplayer` VALUES (9, 1, 2, 'lol', '艾欧尼亚', '黄金', '测试', 10, '声音好听', 1, 'http://q04va6ogc.bkt.clouddn.com/FgsEG5Cnq0Aw5HYQjKD_NJ17NX8R', 'https://music.163.com/song?id=525935284&userid=311334083', 1000, '小米粥');
-INSERT INTO `acc_accplayer` VALUES (10, 6, NULL, '英雄联盟', NULL, '萌新', NULL, NULL, NULL, -1, 'http://q04va6ogc.bkt.clouddn.com/FmGCfYY6_np5rv4rC69gowWg-vSU', '', NULL, '小小');
-INSERT INTO `acc_accplayer` VALUES (11, 7, NULL, '王者荣耀', NULL, '萌新', NULL, NULL, NULL, 1, 'http://q04va6ogc.bkt.clouddn.com/FiKX-ZvydEpMrR1MG4aNoxraSRWV', '', NULL, 'glonk');
+INSERT INTO `acc_accplayer` VALUES ('1', '2', '3', '王者荣耀', '48区', '钻石', '今天就地老', '100', '我很菜', '1', 'http://q04va6ogc.bkt.clouddn.com/Fgy7zfNHn-jRxhzf0XQ2OF9guAs_', 'https://congee.oss-cn-beijing.aliyuncs.com/2019-11-21/6c76efd4b9124eb5aa2bd43a4bfbdccf-f20281273e9fdeef3f8d656a0a840b71.mp3', '100', '喜羊羊', '女', '2019-11-21', 'http://q04va6ogc.bkt.clouddn.com/Fn1QRb31DU1NQxbrozSEscsVpNr9');
+INSERT INTO `acc_accplayer` VALUES ('2', '1', '3', '王者荣耀', '59区', '钻石', '夫人爱喝粥', '50', '我很棒', '0', 'http://q04va6ogc.bkt.clouddn.com/FgUlYOPtRb3V0gVhizWLuMg_OZb0', 'https://congee.oss-cn-beijing.aliyuncs.com/2019-11-21/6c76efd4b9124eb5aa2bd43a4bfbdccf-f20281273e9fdeef3f8d656a0a840b71.mp3', '50', '美羊羊', '男', '2019-11-21', 'http://q04va6ogc.bkt.clouddn.com/Fn1QRb31DU1NQxbrozSEscsVpNr9');
+INSERT INTO `acc_accplayer` VALUES ('3', '3', '2', '绝地求生', '一区', '萌新', '牛奶豆丁', '8', '你真强', '1', 'http://q04va6ogc.bkt.clouddn.com/Fm1NTMoFBh7b0plF-pUO3U_UPCzI', 'https://congee.oss-cn-beijing.aliyuncs.com/2019-11-21/65afd8c7fe1e400caaafd21ad10d704f-f20281273e9fdeef3f8d656a0a840b71.mp3', '36', '懒羊羊', '男', '2019-11-21', 'http://q04va6ogc.bkt.clouddn.com/Fm1NTMoFBh7b0plF-pUO3U_UPCzI');
+INSERT INTO `acc_accplayer` VALUES ('4', '4', '4', '荒野行动', '一区', '萌新', '海倒过来是天', '8', '你真菜', '1', 'http://q04va6ogc.bkt.clouddn.com/Fn52PcowQ3WSXtYIjlYdJAcv9YBr', 'https://congee.oss-cn-beijing.aliyuncs.com/2019-11-21/0d71597b1c6a4c62b50212e76dcbe7a5-f20281273e9fdeef3f8d656a0a840b71.mp3', '40', '沸羊羊', '男', '2019-11-21', 'http://q04va6ogc.bkt.clouddn.com/Fn52PcowQ3WSXtYIjlYdJAcv9YBr');
+INSERT INTO `acc_accplayer` VALUES ('5', '5', '1', '英雄联盟', '一区', '萌新', '炸鸡加油啊', '8', '我很强', '1', 'http://q04va6ogc.bkt.clouddn.com/FpJHuYt_3-CNSgn1MKR9IEt1CcG3', 'https://congee.oss-cn-beijing.aliyuncs.com/2019-11-22/302aa87d39a04adf865f125ce4a306e0-ac7rs05uo0vjkt2y7rvo8srv2cqk8s9y.mp3', '200', '慢羊羊', '女', '2019-11-21', 'http://q04va6ogc.bkt.clouddn.com/FpJHuYt_3-CNSgn1MKR9IEt1CcG3');
+INSERT INTO `acc_accplayer` VALUES ('6', '6', '1', '英雄联盟', '一区', '萌新', '思凡', '100', '我很菜', '1', 'http://q04va6ogc.bkt.clouddn.com/Fgy7zfNHn-jRxhzf0XQ2OF9guAs_', 'https://congee.oss-cn-beijing.aliyuncs.com/2019-11-21/20c7aaf783414506b935cae2fdd18ee2-f20281273e9fdeef3f8d656a0a840b71.mp3', '2', '灰太狼', '女', '2019-11-21', 'http://q04va6ogc.bkt.clouddn.com/Fgy7zfNHn-jRxhzf0XQ2OF9guAs_');
+INSERT INTO `acc_accplayer` VALUES ('7', '7', '3', '王者荣耀', '一区', '王者', '明天就天荒', '1024', '你很棒', '1', 'http://q04va6ogc.bkt.clouddn.com/Fgy7zfNHn-jRxhzf0XQ2OF9guAs_', 'https://congee.oss-cn-beijing.aliyuncs.com/2019-11-21/40cba76991224ab3939a992f7dd6ad1c-f20281273e9fdeef3f8d656a0a840b71.mp3', '98', '小灰灰', '女', '2019-11-21', 'http://q04va6ogc.bkt.clouddn.com/Fgy7zfNHn-jRxhzf0XQ2OF9guAs_');
+INSERT INTO `acc_accplayer` VALUES ('8', '8', '2', '穿越火线', '一区', '萌新', '测试', '30', '我很笨', '1', 'http://q04va6ogc.bkt.clouddn.com/FosQac_hxnZzV__4jd5b6Kf1U_9Z', 'https://congee.oss-cn-beijing.aliyuncs.com/2019-11-21/4b5cfb7f0ff545ed9538b60f5c3342b3-f20281273e9fdeef3f8d656a0a840b71.mp3', '55', '红太狼', '男', '2019-11-21', 'http://q04va6ogc.bkt.clouddn.com/FlELu4Eezdevr0kuVDei-yeVZu0c');
+INSERT INTO `acc_accplayer` VALUES ('9', '9', '3', '王者荣耀', '48区', '星耀', '天天搞学习', '200', '你很强', '1', 'http://q04va6ogc.bkt.clouddn.com/FpurO5eQVXyIRgmkOi8XC-Ln254K', 'https://congee.oss-cn-beijing.aliyuncs.com/2019-11-21/65afd8c7fe1e400caaafd21ad10d704f-f20281273e9fdeef3f8d656a0a840b71.mp3', '320', '蕉太狼', '女', '2019-11-21', 'http://q04va6ogc.bkt.clouddn.com/FpurO5eQVXyIRgmkOi8XC-Ln254K');
+INSERT INTO `acc_accplayer` VALUES ('10', '9', '3', '王者荣耀', 'QQ区', '萌新', '夫人不吃鱼', '99', '我好难', '-1', 'http://q04va6ogc.bkt.clouddn.com/FpurO5eQVXyIRgmkOi8XC-Ln254K', 'https://congee.oss-cn-beijing.aliyuncs.com/2019-11-21/65afd8c7fe1e400caaafd21ad10d704f-f20281273e9fdeef3f8d656a0a840b71.mp3', '160', '光头强', '女', '2019-11-21', 'http://q04va6ogc.bkt.clouddn.com/Fn52PcowQ3WSXtYIjlYdJAcv9YBr');
+INSERT INTO `acc_accplayer` VALUES ('11', '10', '3', '王者荣耀', 'QQ区', '萌新', '偷偷打游戏', '30', '我很强', '1', 'http://q04va6ogc.bkt.clouddn.com/FkkU0baoHBWsHi716lxTGRANQ5j4', 'https://congee.oss-cn-beijing.aliyuncs.com/2019-11-22/0c49861ec3294b9abba5ef1f8cc63871-f20281273e9fdeef3f8d656a0a840b71.mp3', null, '小路飞', '男', '2019-11-23', 'http://q04va6ogc.bkt.clouddn.com/Fm1NTMoFBh7b0plF-pUO3U_UPCzI');
+INSERT INTO `acc_accplayer` VALUES ('12', '11', '3', '王者荣耀', 'QQ区', '萌新', 'test', '10', '我很强', '1', 'http://q04va6ogc.bkt.clouddn.com/Fm1NTMoFBh7b0plF-pUO3U_UPCzI', 'https://congee.oss-cn-beijing.aliyuncs.com/2019-11-23/5e3133f85a7842f4bca2e2bdaf5b2600-f20281273e9fdeef3f8d656a0a840b71.mp3', null, '管理员', '男', '2019-11-23', 'http://q04va6ogc.bkt.clouddn.com/Fm1NTMoFBh7b0plF-pUO3U_UPCzI');
 
 -- ----------------------------
 -- Table structure for acc_attention
 -- ----------------------------
 DROP TABLE IF EXISTS `acc_attention`;
-CREATE TABLE `acc_attention`  (
-  `attention_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '关注列表id',
+CREATE TABLE `acc_attention` (
+  `attention_id` int(11) NOT NULL auto_increment COMMENT '关注列表id',
   `user_id` int(11) NOT NULL COMMENT '用户id',
   `accplayer_id` int(11) NOT NULL COMMENT '陪玩id',
   `attention_status` int(11) NOT NULL COMMENT '关注状态:默认 0关注 1拉黑',
-  PRIMARY KEY USING BTREE (`attention_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+  PRIMARY KEY  USING BTREE (`attention_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of acc_attention
 -- ----------------------------
-INSERT INTO `acc_attention` VALUES (1, 1, 1, 1);
+INSERT INTO `acc_attention` VALUES ('1', '2', '6', '1');
+INSERT INTO `acc_attention` VALUES ('2', '1', '6', '1');
 
 -- ----------------------------
 -- Table structure for acc_comment
 -- ----------------------------
 DROP TABLE IF EXISTS `acc_comment`;
-CREATE TABLE `acc_comment`  (
-  `comment_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '评论id',
-  `user_id` int(11) NOT NULL COMMENT '用户id',
-  `accplayer_id` int(11) NOT NULL COMMENT '陪玩id',
-  `order_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '订单id',
-  `game_id` int(11) NOT NULL COMMENT '板块id',
-  `comment_context` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '评论内容',
-  `comment_createtime` datetime NOT NULL COMMENT '评论时间',
-  `comment_rank` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '评分',
-  PRIMARY KEY USING BTREE (`comment_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+CREATE TABLE `acc_comment` (
+  `comment_id` int(11) NOT NULL auto_increment COMMENT '评论id',
+  `user_nickname` varchar(255) collate utf8_bin NOT NULL COMMENT '用户昵称',
+  `accplayer_id` int(11) default NULL COMMENT '陪玩id',
+  `order_id` varchar(255) collate utf8_bin default NULL COMMENT '订单id',
+  `game_id` int(11) default NULL COMMENT '板块id',
+  `comment_context` varchar(255) collate utf8_bin default NULL COMMENT '评论内容',
+  `comment_createtime` datetime default NULL COMMENT '评论时间',
+  `comment_rank` varchar(255) collate utf8_bin default NULL COMMENT '评分',
+  PRIMARY KEY  USING BTREE (`comment_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of acc_comment
 -- ----------------------------
-INSERT INTO `acc_comment` VALUES (1, 2, 1, '000111', 1, '小姐姐技术真不错！！！', '2019-11-11 21:53:27', '666');
+INSERT INTO `acc_comment` VALUES ('1', '明天就天荒', '6', '2', '1', '声音好听', '2019-11-22 16:32:59', '666');
+INSERT INTO `acc_comment` VALUES ('2', '传闻', '6', '1', '1', '技术好', '2019-11-22 16:34:25', '666');
 
 -- ----------------------------
 -- Table structure for acc_game
 -- ----------------------------
 DROP TABLE IF EXISTS `acc_game`;
-CREATE TABLE `acc_game`  (
-  `game_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '板块id',
-  `game_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '板块名称',
-  `game_daqu` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '游戏大区',
-  `game_duanwei` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '游戏段位',
-  PRIMARY KEY USING BTREE (`game_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+CREATE TABLE `acc_game` (
+  `game_id` int(11) NOT NULL auto_increment COMMENT '板块id',
+  `game_name` varchar(255) collate utf8_bin NOT NULL COMMENT '板块名称',
+  `game_daqu` varchar(255) collate utf8_bin default NULL COMMENT '游戏大区',
+  `game_duanwei` varchar(255) collate utf8_bin default NULL COMMENT '游戏段位',
+  PRIMARY KEY  USING BTREE (`game_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of acc_game
 -- ----------------------------
-INSERT INTO `acc_game` VALUES (1, '王者荣耀', '神来之笔', '永和钻石Ⅲ');
-INSERT INTO `acc_game` VALUES (2, 'lol', '艾欧尼亚', '青铜');
-INSERT INTO `acc_game` VALUES (3, 'qq飞车', '电信', '青铜');
-INSERT INTO `acc_game` VALUES (4, '绝地求生', 'xxx', 'xxx');
-INSERT INTO `acc_game` VALUES (5, '和平精英', '小星星', '小星星');
-INSERT INTO `acc_game` VALUES (6, '云顶之弈', 'xxx', 'xxx');
+INSERT INTO `acc_game` VALUES ('1', '英雄联盟', '一区', '王者');
+INSERT INTO `acc_game` VALUES ('2', '绝地求生', '一区', '王者');
+INSERT INTO `acc_game` VALUES ('3', '王者荣耀', '一区', '王者');
+INSERT INTO `acc_game` VALUES ('4', '荒野行动', '一区', '王者');
+INSERT INTO `acc_game` VALUES ('5', '和平精英', '一区', '王者');
+INSERT INTO `acc_game` VALUES ('6', '云顶之弈', null, null);
+INSERT INTO `acc_game` VALUES ('7', '穿越火线', null, null);
 
 -- ----------------------------
 -- Table structure for acc_images
 -- ----------------------------
 DROP TABLE IF EXISTS `acc_images`;
-CREATE TABLE `acc_images`  (
-  `image_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '图片详情id',
-  `accplayer_id` int(11) NOT NULL COMMENT '陪玩id',
-  `accplayer_pic1` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '陪玩图片1',
-  `accplayer_pic2` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '陪玩图片2',
-  `accplayer_pic3` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '陪玩图片3',
-  `accplayer_pic4` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '陪玩图片4',
-  `accplayer_video` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '陪玩上传音频文件',
-  PRIMARY KEY USING BTREE (`image_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+CREATE TABLE `acc_images` (
+  `image_id` int(11) NOT NULL auto_increment COMMENT '图片详情id',
+  `accplayer_id` int(11) default NULL COMMENT '陪玩id',
+  `accplayer_pic1` varchar(255) collate utf8_bin default NULL COMMENT '陪玩图片1',
+  `accplayer_pic2` varchar(255) collate utf8_bin default NULL COMMENT '陪玩图片2',
+  `accplayer_pic3` varchar(255) collate utf8_bin default NULL COMMENT '陪玩图片3',
+  `accplayer_pic4` varchar(255) collate utf8_bin default NULL COMMENT '陪玩图片4',
+  `accplayer_video` varchar(255) collate utf8_bin default NULL COMMENT '陪玩上传音频文件',
+  PRIMARY KEY  USING BTREE (`image_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of acc_images
+-- ----------------------------
+INSERT INTO `acc_images` VALUES ('1', '6', 'http://q04va6ogc.bkt.clouddn.com/Fv8pqwNgbrkTEkgSPY9TdpN4frRF', 'http://q04va6ogc.bkt.clouddn.com/Fj2pZoRUvOt9F56seIa56oybOmW0', 'http://q04va6ogc.bkt.clouddn.com/FngfUKZ0vSXljdfx0bceslaWqsOA', 'http://q04va6ogc.bkt.clouddn.com/FhHeOle6ehUg4N-hbHmhMgIqbGV7', null);
+INSERT INTO `acc_images` VALUES ('2', '8', 'http://q04va6ogc.bkt.clouddn.com/Fm1NTMoFBh7b0plF-pUO3U_UPCzI', 'http://q04va6ogc.bkt.clouddn.com/FgxKF1Gb1hJ0e2p94_akTWrEfKDv', 'http://q04va6ogc.bkt.clouddn.com/Fn52PcowQ3WSXtYIjlYdJAcv9YBr', 'http://q04va6ogc.bkt.clouddn.com/FpJHuYt_3-CNSgn1MKR9IEt1CcG3', null);
+INSERT INTO `acc_images` VALUES ('3', '11', 'http://q04va6ogc.bkt.clouddn.com/Fm1NTMoFBh7b0plF-pUO3U_UPCzI', 'http://q04va6ogc.bkt.clouddn.com/Fo8T8Qz7D75QdoVzHZC_Gk8g0pkl', 'http://q04va6ogc.bkt.clouddn.com/Fn52PcowQ3WSXtYIjlYdJAcv9YBr', 'http://q04va6ogc.bkt.clouddn.com/FpJHuYt_3-CNSgn1MKR9IEt1CcG3', null);
+INSERT INTO `acc_images` VALUES ('4', '12', 'http://q04va6ogc.bkt.clouddn.com/Fm1NTMoFBh7b0plF-pUO3U_UPCzI', 'http://q04va6ogc.bkt.clouddn.com/Fo8T8Qz7D75QdoVzHZC_Gk8g0pkl', 'http://q04va6ogc.bkt.clouddn.com/FozPWsqOZGbSRoOjT9iREk8hBF2S', 'http://q04va6ogc.bkt.clouddn.com/Fn52PcowQ3WSXtYIjlYdJAcv9YBr', null);
 
 -- ----------------------------
 -- Table structure for acc_money
 -- ----------------------------
 DROP TABLE IF EXISTS `acc_money`;
-CREATE TABLE `acc_money`  (
-  `money_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户钱包记录流水号',
+CREATE TABLE `acc_money` (
+  `money_id` int(11) NOT NULL auto_increment COMMENT '用户钱包记录流水号',
   `user_id` int(11) NOT NULL COMMENT '用户id',
-  `user_mid` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '用户账户id',
-  `order_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '用户充值订单id',
-  `money_banlance` double(10, 0) NOT NULL COMMENT '钱包余额',
+  `user_mid` varchar(255) collate utf8_bin NOT NULL COMMENT '用户账户id',
+  `order_id` varchar(255) collate utf8_bin NOT NULL COMMENT '用户充值订单id',
+  `money_banlance` double(10,0) NOT NULL COMMENT '钱包余额',
   `money_changetime` datetime NOT NULL COMMENT '充值时间',
   `money_charge` int(11) NOT NULL COMMENT '充值金额',
-  PRIMARY KEY USING BTREE (`money_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+  PRIMARY KEY  USING BTREE (`money_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of acc_money
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for acc_order
 -- ----------------------------
 DROP TABLE IF EXISTS `acc_order`;
-CREATE TABLE `acc_order`  (
-  `order_no` int(11) NOT NULL AUTO_INCREMENT COMMENT '订单流水id',
-  `order_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '订单id',
+CREATE TABLE `acc_order` (
+  `order_id` int(11) NOT NULL auto_increment COMMENT '订单id',
+  `order_no` varchar(255) collate utf8_bin NOT NULL COMMENT '订单流水id',
   `accplayer_id` int(11) NOT NULL COMMENT '陪玩id',
-  `user_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '用户姓名',
+  `user_nickname` varchar(255) collate utf8_bin default NULL COMMENT '用户姓名',
   `game_id` int(11) NOT NULL COMMENT '板块id',
-  `game_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '板块名称',
-  `order_appointedtime` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '约定时长',
-  `order_content` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '订单留言',
-  `order_money` double(255, 0) NOT NULL COMMENT '订单金额',
+  `game_name` varchar(255) collate utf8_bin NOT NULL COMMENT '板块名称',
+  `order_appointedtime` int(11) NOT NULL COMMENT '订单时长',
+  `order_content` varchar(255) collate utf8_bin default NULL COMMENT '订单留言',
+  `order_money` double(255,0) NOT NULL COMMENT '订单金额',
   `order_createtime` datetime NOT NULL COMMENT '订单创建时间',
   `order_status` int(11) NOT NULL COMMENT '订单状态: 默认 0未支付 1已支付',
-  PRIMARY KEY USING BTREE (`order_no`)
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+  `user_tel` varchar(255) collate utf8_bin default NULL COMMENT '用户手机号',
+  `user_qq` varchar(255) collate utf8_bin default NULL COMMENT '用户qq',
+  PRIMARY KEY  USING BTREE (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of acc_order
 -- ----------------------------
-INSERT INTO `acc_order` VALUES (1, '000111', 1, 'test', 1, '王者荣耀', '3', '技术好', 24, '2019-11-11 17:51:48', 0);
+INSERT INTO `acc_order` VALUES ('1', '8041201764564182', '6', '传闻', '1', '英雄联盟', '1', '我要一个声音好听的，不好听就退单', '100', '2019-11-21 17:36:11', '1', '15674348918', '547303896');
+INSERT INTO `acc_order` VALUES ('2', '3451320424484486', '6', '明天就天荒', '1', '英雄联盟', '1', '么么哒', '100', '2019-11-21 18:40:37', '1', null, null);
+INSERT INTO `acc_order` VALUES ('3', '5000522377822257', '5', 'zhaji', '1', '英雄联盟', '1', null, '20', '2019-11-21 19:05:31', '0', null, null);
+INSERT INTO `acc_order` VALUES ('4', '7544224531860783', '5', 'zhaji', '1', '英雄联盟', '1', null, '20', '2019-11-21 19:16:34', '0', null, null);
+INSERT INTO `acc_order` VALUES ('5', '8143138420487487', '8', '帅哥', '2', '穿越火线', '1', '么么么哒', '30', '2019-11-21 19:35:21', '1', '17809163801', null);
+INSERT INTO `acc_order` VALUES ('6', '7620383405852655', '5', 'zhaji', '1', '英雄联盟', '1', null, '20', '2019-11-22 09:02:36', '0', null, null);
+INSERT INTO `acc_order` VALUES ('7', '6078333733621832', '6', 'cw', '1', '英雄联盟', '1', null, '100', '2019-11-22 09:03:24', '0', null, null);
+INSERT INTO `acc_order` VALUES ('8', '6330756223486723', '3', 'milk', '2', '绝地求生', '1', null, '40', '2019-11-22 09:10:05', '0', null, null);
+INSERT INTO `acc_order` VALUES ('9', '5355311238512418', '5', 'zhaji', '1', '英雄联盟', '1', null, '20', '2019-11-22 09:44:01', '0', null, null);
+INSERT INTO `acc_order` VALUES ('10', '7853845283158331', '2', 'glonk', '3', '王者荣耀', '1', null, '50', '2019-11-22 14:37:23', '0', null, null);
+INSERT INTO `acc_order` VALUES ('11', '7706275015451260', '6', '灰太狼', '1', '英雄联盟', '1', null, '100', '2019-11-22 22:03:42', '0', null, null);
+INSERT INTO `acc_order` VALUES ('12', '8048146857177161', '11', '路飞', '3', '王者荣耀', '1', '我要赢', '30', '2019-11-22 22:41:43', '1', '17809163801', '1647731302');
+INSERT INTO `acc_order` VALUES ('13', '0052086134156851', '6', '灰太狼', '1', '英雄联盟', '1', 'ceshi', '100', '2019-11-23 10:24:18', '1', '17809163801', '1647731302');
+INSERT INTO `acc_order` VALUES ('14', '3848637888427041', '6', '灰太狼', '1', '英雄联盟', '4', null, '400', '2019-11-23 10:26:34', '0', null, null);
 
 -- ----------------------------
 -- Table structure for acc_player
 -- ----------------------------
 DROP TABLE IF EXISTS `acc_player`;
-CREATE TABLE `acc_player`  (
-  `player_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '老板详情id',
+CREATE TABLE `acc_player` (
+  `player_id` int(11) NOT NULL auto_increment COMMENT '老板详情id',
   `user_id` int(11) NOT NULL COMMENT '用户id',
-  `order_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '订单id',
+  `order_id` varchar(255) collate utf8_bin NOT NULL COMMENT '订单id',
   `consume_id` int(11) NOT NULL COMMENT '消费id',
-  `consume_money` double(255, 0) NOT NULL COMMENT '消费金额',
+  `consume_money` double(255,0) NOT NULL COMMENT '消费金额',
   `consume_time` datetime NOT NULL COMMENT '消费时间',
-  `consume_createtime` datetime NULL DEFAULT NULL,
-  PRIMARY KEY USING BTREE (`player_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+  `consume_createtime` datetime default NULL,
+  PRIMARY KEY  USING BTREE (`player_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of acc_player
 -- ----------------------------
-INSERT INTO `acc_player` VALUES (1, 2, '000111', 1, 24, '2019-11-11 16:52:45', NULL);
 
 -- ----------------------------
 -- Table structure for acc_user
 -- ----------------------------
 DROP TABLE IF EXISTS `acc_user`;
-CREATE TABLE `acc_user`  (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户id',
-  `user_nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '昵称',
-  `user_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '用户姓名',
-  `user_pwd` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '密码',
-  `user_tel` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '电话',
-  `user_qq` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT 'QQ',
-  `user_gender` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '性别',
-  `user_birthday` datetime NULL DEFAULT NULL COMMENT '出生日期',
-  `user_weixin` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '微信',
-  `user_pic` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '头像',
-  `user_address` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '地址',
-  `user_content` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '签名',
-  `user_createtime` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '创建时间',
-  `user_becometime` date NULL DEFAULT NULL COMMENT '成为陪玩时间',
-  `user_identify` int(11) NULL DEFAULT NULL COMMENT '标识:0老板 1陪玩 \r\n',
-  `user_status` int(11) NULL DEFAULT NULL COMMENT '用户申请状态:0未认证 1正常',
-  PRIMARY KEY USING BTREE (`user_id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+CREATE TABLE `acc_user` (
+  `user_id` int(11) NOT NULL auto_increment COMMENT '用户id',
+  `user_nickname` varchar(255) collate utf8_bin default NULL COMMENT '昵称',
+  `user_name` varchar(255) collate utf8_bin default NULL COMMENT '用户姓名',
+  `user_pwd` varchar(255) collate utf8_bin NOT NULL COMMENT '密码',
+  `user_tel` varchar(255) collate utf8_bin NOT NULL COMMENT '电话',
+  `user_qq` varchar(255) collate utf8_bin default NULL COMMENT 'QQ',
+  `user_gender` varchar(255) collate utf8_bin default NULL COMMENT '性别',
+  `user_birthday` datetime default NULL COMMENT '出生日期',
+  `user_weixin` varchar(255) collate utf8_bin default NULL COMMENT '微信',
+  `user_pic` varchar(255) collate utf8_bin default NULL COMMENT '头像',
+  `user_address` varchar(255) collate utf8_bin default NULL COMMENT '地址',
+  `user_content` varchar(255) collate utf8_bin default NULL COMMENT '签名',
+  `user_createtime` datetime default NULL COMMENT '创建时间',
+  `user_becometime` datetime default NULL COMMENT '成为陪玩时间',
+  `user_identify` int(11) default NULL COMMENT '标识:0老板 1陪玩 \r\n',
+  `user_status` int(11) default NULL COMMENT '用户申请状态:0未认证 1正常',
+  PRIMARY KEY  USING BTREE (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of acc_user
 -- ----------------------------
-INSERT INTO `acc_user` VALUES (1, '小米粥', 'congee', 'congee', '', '1647731302', '男', '1996-09-11 00:00:00', 'yhf1647731302', 'http://q04va6ogc.bkt.clouddn.com/FgsEG5Cnq0Aw5HYQjKD_NJ17NX8R', '西安', '莫愁前路无知己', '2019-11-12', '2019-11-28', 2, 1);
-INSERT INTO `acc_user` VALUES (2, '茉心', 'moxin', 'moxin', '18220842293', '120', '女', '2019-11-13 17:49:26', '123', 'http://q04va6ogc.bkt.clouddn.com/FiKX-ZvydEpMrR1MG4aNoxraSRWV', '内江市', '超级无敌巨可爱的茉心宝贝儿', '2019-11-13', '2019-11-13', 1, 1);
-INSERT INTO `acc_user` VALUES (3, '奶杀', 'naisha', 'naisha', '', '130', '女', '2019-11-13 17:52:55', '134', 'http://q04va6ogc.bkt.clouddn.com/FmGCfYY6_np5rv4rC69gowWg-vSU', '保密', '下单前私聊谢谢！', '2019-11-13', '2019-11-13', 1, 1);
-INSERT INTO `acc_user` VALUES (5, '千寻', 'qianxun', '123456', '', NULL, '女', '2019-11-14 19:23:09', NULL, 'http://q04va6ogc.bkt.clouddn.com/Ft8gu9YWockBx8tN4pGWzPRSHWI6', '西安', NULL, '2019-11-14', NULL, 1, 1);
-INSERT INTO `acc_user` VALUES (6, '小小', NULL, '12345', '17809163801', '3183084220', '女', '2019-11-11 00:00:00', NULL, 'http://q04va6ogc.bkt.clouddn.com/FiKX-ZvydEpMrR1MG4aNoxraSRWV', '西安', '好无聊', NULL, NULL, 1, 1);
-INSERT INTO `acc_user` VALUES (7, 'glonk', NULL, '123456', '13891836761', NULL, '女', '1998-05-10 00:00:00', NULL, 'http://q04va6ogc.bkt.clouddn.com/Fr0WoZijj4gUhT9rOMRBRfCyrs7R', NULL, NULL, NULL, NULL, 1, 1);
+INSERT INTO `acc_user` VALUES ('1', 'glonk', 'Amani', '12345', '17809163802', '3183084220', '女', '1997-01-01 00:00:00', 'QYJY4737', 'http://q04va6ogc.bkt.clouddn.com/Fr0WoZijj4gUhT9rOMRBRfCyrs7R', '西安', '我一点都不会', '2019-11-21 00:00:00', '2019-11-01 00:00:00', '0', '1');
+INSERT INTO `acc_user` VALUES ('2', 'glonk', 'wgb', '123456', '13891836761', '1123416512', '女', '1998-05-10 00:00:00', '13891836761', 'http://q04va6ogc.bkt.clouddn.com/Fgy7zfNHn-jRxhzf0XQ2OF9guAs_', '西安', '吞噬月亮，切碎宇宙。', null, null, '1', '0');
+INSERT INTO `acc_user` VALUES ('3', '牛奶豆丁', 'swl', '123456', '18220842110', '1119649110', '男', '1989-12-12 00:00:00', '18220842110', 'http://q04va6ogc.bkt.clouddn.com/Fm1NTMoFBh7b0plF-pUO3U_UPCzI', '宝鸡', '你很菜', null, null, '1', '0');
+INSERT INTO `acc_user` VALUES ('4', '海倒过', 'gh', '123456', '15353873571', '840370814', '男', '1989-12-12 00:00:00', '15353873571', 'http://q04va6ogc.bkt.clouddn.com/Fn52PcowQ3WSXtYIjlYdJAcv9YBr', '兴平', '我很酷', null, null, '1', '0');
+INSERT INTO `acc_user` VALUES ('5', 'zhaji', '炸鸡', '123456', '17791434328', '496720190', '女', '1997-10-14 00:00:00', '17791434328', 'http://q04va6ogc.bkt.clouddn.com/FpJHuYt_3-CNSgn1MKR9IEt1CcG3', '西安', '炸鸡加油啊!!!', null, null, '1', '0');
+INSERT INTO `acc_user` VALUES ('6', '传闻', 'ybj', '123456', '15674348918', '547303896', '女', '1997-06-01 00:00:00', '15674348918', 'http://q04va6ogc.bkt.clouddn.com/FmIeJILIFkj6gEDmSC_Iyqudpl14', '湖南', '多好玩的东西，早晚会放低。', null, null, '1', '0');
+INSERT INTO `acc_user` VALUES ('7', '明天就天荒', 'mtjth', '123456', '13759938530', '759845965', '女', '1998-05-23 00:00:00', '13759938530', 'http://q04va6ogc.bkt.clouddn.com/Fgy7zfNHn-jRxhzf0XQ2OF9guAs_', '西安', '大宇宙滂沱', null, null, '1', '0');
+INSERT INTO `acc_user` VALUES ('8', '帅哥', 'cqw', '123456', '17688988728', '1085708370', '男', '1994-10-18 00:00:00', '17688988728', 'http://q04va6ogc.bkt.clouddn.com/FosQac_hxnZzV__4jd5b6Kf1U_9Z', '湖北', '太帅', null, null, '1', '0');
+INSERT INTO `acc_user` VALUES ('9', '全栈工程师', 'wgb', '123456', '18092971425', '1123416512', '女', '1998-05-10 00:00:00', '18092971425', 'http://q04va6ogc.bkt.clouddn.com/FpurO5eQVXyIRgmkOi8XC-Ln254K', '蓝田', '战无不胜', null, null, '1', '0');
+INSERT INTO `acc_user` VALUES ('10', '路飞', 'lf', '311656', '17809163801', '1647731302', '男', '2018-11-11 00:00:00', 'QYJY4737', 'http://q04va6ogc.bkt.clouddn.com/FkkU0baoHBWsHi716lxTGRANQ5j4', '咸阳', '我太难了', null, null, '1', '0');
+INSERT INTO `acc_user` VALUES ('11', '管理员', 'test', '123456', '17791294125', null, '男', '2019-11-11 00:00:00', null, 'http://q04va6ogc.bkt.clouddn.com/Fm1NTMoFBh7b0plF-pUO3U_UPCzI', '西安', null, null, null, '1', '0');
 
 -- ----------------------------
 -- Table structure for game
 -- ----------------------------
 DROP TABLE IF EXISTS `game`;
-CREATE TABLE `game`  (
-  `game_id` int(11) NOT NULL AUTO_INCREMENT,
-  `game_daqu` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `game_duanwei` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `game_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  PRIMARY KEY USING BTREE (`game_id`)
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+CREATE TABLE `game` (
+  `game_id` int(11) NOT NULL auto_increment,
+  `game_daqu` varchar(255) collate utf8_bin default NULL,
+  `game_duanwei` varchar(255) collate utf8_bin default NULL,
+  `game_name` varchar(255) collate utf8_bin default NULL,
+  PRIMARY KEY  USING BTREE (`game_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=DYNAMIC;
+
+-- ----------------------------
+-- Records of game
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for wanan
 -- ----------------------------
 DROP TABLE IF EXISTS `wanan`;
-CREATE TABLE `wanan`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `pass` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `token` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY USING BTREE (`id`)
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Compact;
+CREATE TABLE `wanan` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) collate utf8_bin NOT NULL,
+  `pass` varchar(255) collate utf8_bin NOT NULL,
+  `token` varchar(255) collate utf8_bin NOT NULL,
+  PRIMARY KEY  USING BTREE (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of wanan
 -- ----------------------------
-INSERT INTO `wanan` VALUES (1, 'admin', '12345', 'usertoken');
-
-SET FOREIGN_KEY_CHECKS = 1;
+INSERT INTO `wanan` VALUES ('1', 'admin', 'admin', 'usertoken');
